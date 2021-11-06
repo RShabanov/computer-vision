@@ -38,7 +38,7 @@ def euler(img, label):
     return X - Y
 
 def neighbours(y, x):
-    return (y, x+1), (y+1, x+1) (y+1, x), (y, x-1), (y-1, x-1), (y-1, x)
+    return (y, x+1), (y+1, x), (y, x-1), (y-1, x)
 
 def get_boundaries(LB, label=1):
     pxs = np.where(LB == label)
