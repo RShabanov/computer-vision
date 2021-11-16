@@ -43,6 +43,12 @@ def recognize(region):
     elif lakes == 1:
         if bays == 3:
             return "A"
+        if bays == 2:
+            cy = region.image.shape[0] // 2
+            cx = region.image.shape[1] // 2
+            if region.image[cy, cx] > 0:
+                return "P"
+            return "D"
         else:
             return "0"
     elif lakes == 0:
@@ -62,7 +68,7 @@ def recognize(region):
             return "W`"
     return None
 
-image = plt.imread("./practice/alphabet.png")
+image = plt.imread("practice/alphabet-detection/symbols.png")
 binary = np.sum(image, 2)
 binary[binary > 0] = 1
 
@@ -76,17 +82,13 @@ for region in regions:
     symbol = recognize(region)
     if symbol is not None:
         labeled[np.where(labeled == region.label)] = 0
-    # else:
-        # print(f"Filling factor: {filling_factor(region.image)}")
     if symbol not in d:
         d[symbol] = 0
     d[symbol] += 1
     
 print(d)
 print(f"Accuracy: {round((1. - d[None] / sum(d.values())) * 100, 2)}")
-# print(lakes_and_bays(regions[72]))
 
 
 plt.imshow(labeled)
-# plt.imshow(regions[73].image, cmap='gray')
 plt.show()
