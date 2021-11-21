@@ -1,6 +1,8 @@
 import cv2
 import numpy as np
 
+# print(cv2.getBuildInformation())
+
 news = cv2.imread("./practice/news/news.jpg")
 chebu = cv2.imread("./practice/news/cheburashka.jpg")
 
@@ -24,7 +26,10 @@ M = cv2.getPerspectiveTransform(pts1, pts2)
 
 aff_img = cv2.warpPerspective(chebu, M, (cols, rows))[:300, :470]
 
-news[:aff_img.shape[0], :aff_img.shape[1]] = aff_img
+for y in range(aff_img.shape[0]):
+    for x in range(aff_img.shape[1]):
+        if np.all(aff_img[y, x] == 0): continue
+        news[y, x] = aff_img[y, x]
 
 cv2.namedWindow("Image", cv2.WINDOW_KEEPRATIO)
 cv2.imshow("Image", news)
