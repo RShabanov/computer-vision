@@ -1,7 +1,7 @@
 Определить сколько фигур каждого цвета имеется на изображении. Программа должна выдавать общее количество фигур на изображении и отдельно для прямоугольников и кругов количество по цвету.
 
-Result:
-```
+<h3>Result:</h3>
+<pre>
 Total number of figures: 257
 Rectangles: {
         yellow: 32
@@ -19,10 +19,14 @@ Circles: {
         purple: 23
         green: 34
 }
-```
+</pre>
 
-Input image:
-![](./balls_and_rects.png)
+<h3>Input image:</h3>
+<div style="text-align: center">
+    <img src="./balls_and_rects.png" width=500>
+</div>
 
-HSV:
-![](./hsv_scale.jpg)
+<h3>HSV scale:</h3>
+<div style="text-align: center">
+    <img src="./hsv_scale.jpg">
+</div>
