@@ -41,14 +41,13 @@ def _chain(bounds):
         y, x = bounds[0]
         del bounds[0]
         
-        while bounds_len != len(dirs):
+        while bounds_len != len(dirs) and len(bounds) != 0:
             for n, (ny, nx) in enumerate(neighbors8(y, x)):
                 if (ny, nx) in bounds:
                     dirs.append(n)
                     y, x = ny, nx
                     del bounds[bounds.index((ny, nx))]
                     break
-            else: break
     return dirs
 
 def curvature(chain):
