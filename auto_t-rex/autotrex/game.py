@@ -95,7 +95,9 @@ class Dino:
                 time_history = time_history[1:] + [d_time]
                 prev_time = curr_time
 
-                if int(curr_time - start_time) % 16 == 15:
+                # approximately
+                # every 100 px or whatever it is
+                if int(curr_time - start_time) % 11 == 10:
                     start_time = curr_time
                     acceleration += acceleration_coeff
                         
@@ -139,16 +141,15 @@ class Dino:
                     dist = obstacle.top_left.x - dino.bottom_right.x
 
                     if dist < threshold:
-                        if abs(monitor["height"] / 2 - obstacle.bottom_right.y) < 2:
-                            print(f"{dino.bottom_right.y - obstacle.bottom_right.y}")
+                        if abs(monitor["height"] / 2 - obstacle.bottom_right.y) < 5:
                             pag.keyDown("down")
-                            time.sleep(0.0025)
+                            time.sleep(0.0035)
                             pag.keyUp("down")
                         else:
                             pag.press("space")
                             time.sleep(0.00523)
 
-                # self._debug(img, obstacles)
+                self._debug(img, obstacles)
 
                 key = cv2.waitKey(1)
                 if key == ord('q'):
@@ -172,7 +173,7 @@ class Dino:
         matches = cv2.matchTemplate(img_edge, edge_dino_template, cv2.TM_CCOEFF_NORMED)
         _, maxVal, _, max_loc = cv2.minMaxLoc(matches)
 
-        if maxVal < 0.7:
+        if maxVal < 0.6:
             raise Exception("T-Rex was not found")
 
         h, w = edge_dino_template.shape
